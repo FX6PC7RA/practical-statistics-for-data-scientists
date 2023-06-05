@@ -32,7 +32,7 @@ airline_stats$airline <- ordered(airline_stats$airline,
 # Table 1-2
 state_asc <- state
 state_asc[['Population']] <- formatC(state_asc[['Population']], format='d', digits=0, big.mark=',')
-state_asc[1:8,]
+state_asc[10:13,]
 
 mean(state[['Population']])
 mean(state[['Population']], trim=0.1)
@@ -57,19 +57,19 @@ boxplot(state[['Population']]/1000000, ylab='Population (millions)')
 ### Frequency Table and Histograms
 
 breaks <- seq(from=min(state[['Population']]),
-              to=max(state[['Population']]), length=11)
+              to=max(state[['Population']]), length=20)
 pop_freq <- cut(state[['Population']], breaks=breaks,
                 right=TRUE, include.lowest=TRUE)
 state['PopFreq'] <- pop_freq
 table(pop_freq)
 
 options(scipen=5)
-hist(state[['Population']], breaks=breaks)
+hist(state[['Population']], breaks=breaks, col = "blue")
 
 ### Density Estimates
 # Density is an alternative to histograms that can provide more insight into the distribution of the data points.
-
-hist(state[['Murder.Rate']], freq=FALSE )
+hist(state[['Murder.Rate']])# Count of murder rates in the bins
+hist(state[['Murder.Rate']], freq=FALSE ) # Density of murder rate
 lines(density(state[['Murder.Rate']]), lwd=3, col='blue')
 
 ## Exploring Binary and Categorical Data
