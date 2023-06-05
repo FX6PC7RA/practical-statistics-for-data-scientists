@@ -83,16 +83,27 @@ telecom <- sp500_px[, sp500_sym[sp500_sym$sector == 'telecommunications_services
 telecom <- telecom[row.names(telecom) > '2012-07-01',]
 telecom_cor <- cor(telecom)
 
+consulting<- sp500_px[, sp500_sym[sp500_sym$sub_sector == 'it_consulting_&_services', 'symbol']]
+
+consulting_cor <- cor(consulting)
+
+corrplot(consulting_cor)
+corrplot(telecom_cor,  method='ellipse')
 # Next we focus on funds traded on major exchanges (sector == 'etf').
 
 etfs <- sp500_px[row.names(sp500_px) > '2012-07-01',
                  sp500_sym[sp500_sym$sector == 'etf', 'symbol']]
 corrplot(cor(etfs), method='ellipse')
 
+corrplot(cor(etfs))
+
 ### Scatterplots
 
 # plot(telecom$T, telecom$VZ, xlab='T', ylab='VZ', cex=.8)
 plot(telecom$T, telecom$VZ, xlab='ATT (T)', ylab='Verizon (VZ)')
+abline(h=0, v=0, col='grey')
+dim(telecom)
+plot(telecom$T, telecom$LVLT, xlab='ATT (T)', ylab='Verizon (LVLT)', col = 'blue')
 abline(h=0, v=0, col='grey')
 dim(telecom)
 
@@ -101,7 +112,7 @@ dim(telecom)
 
 kc_tax0 <- subset(kc_tax, TaxAssessedValue < 750000 &
                   SqFtTotLiving > 100 &
-                  SqFtTotLiving < 3500)
+                  SqFtTotLiving < 4000)
 nrow(kc_tax0)
 
 ### Hexagonal binning and Contours
@@ -111,10 +122,10 @@ nrow(kc_tax0)
 
 graph <- ggplot(kc_tax0, (aes(x=SqFtTotLiving, y=TaxAssessedValue))) +
   stat_binhex(color='white') +
-  theme_bw() +
-  scale_fill_gradient(low='white', high='blue') +
-  scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
-  labs(x='Finished Square Feet', y='Tax-Assessed Value')
+  #theme_bw() +
+   scale_fill_gradient(low='white', high='blue') +
+   scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
+   labs(x='Finished Square Feet', y='Tax-Assessed Value')
 graph
 
 # Visualize as a two-dimensional extension of the density plot.
@@ -155,7 +166,7 @@ graph <- ggplot(subset(kc_tax0, ZipCode %in% c(98188, 98105, 98108, 98126)),
                 aes(x=SqFtTotLiving, y=TaxAssessedValue)) +
   stat_binhex(colour='white') +
   theme_bw() +
-  scale_fill_gradient(low='gray95', high='black') +
+  scale_fill_gradient(low='gray95', high='blue') +
   scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
   labs(x='Finished Square Feet', y='Tax-Assessed Value') +
   facet_wrap('ZipCode')
