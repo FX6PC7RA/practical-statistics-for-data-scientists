@@ -12,7 +12,7 @@ library(corrplot)
 library(gmodels)
 library(matrixStats)
 
-# Import the datasets needed for chapter 1 - test2
+# Import the datasets needed for chapter 1 - test3
 
 
 
