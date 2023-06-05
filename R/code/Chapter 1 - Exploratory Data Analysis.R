@@ -12,7 +12,7 @@ library(corrplot)
 library(gmodels)
 library(matrixStats)
 
-# Import the datasets needed for chapter 1
+# Import the datasets needed for chapter 2
 
 # PSDS_PATH <- file.path(dirname(dirname(getwd())))
 PSDS_PATH <- getwd()
