@@ -160,7 +160,7 @@ graph <- ggplot(data=airline_stats, aes(airline, pct_carrier_delay)) +
   theme_bw()
 graph
 
-### Visualizing Multiple Variables
+### Visualizing Multiple Variables _
 
 graph <- ggplot(subset(kc_tax0, ZipCode %in% c(98188, 98105, 98108, 98126)),
                 aes(x=SqFtTotLiving, y=TaxAssessedValue)) +
