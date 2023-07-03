@@ -15,8 +15,7 @@ library(pwr)
 
 # Define paths to data sets. If you don't keep your data in the same directory as the code, adapt the path names.
 
-PSDS_PATH <- file.path(dirname(dirname(getwd())))
-
+PSDS_PATH <- getwd()
 
 session_times <- read.csv(file.path(PSDS_PATH, 'data', 'web_page_data.csv'))
 session_times[,2] <- session_times[,2] * 100
@@ -27,9 +26,9 @@ imanishi <-  read.csv(file.path(PSDS_PATH, 'data', 'imanishi_data.csv'))
 ## Resampling
 ### Example: Web Stickiness
 
-graph <- ggplot(session_times, aes(x=Page, y=Time)) + 
+graph <- ggplot(session_times, aes(x=Page, y=Time)) +
   geom_boxplot() +
-  labs(y='Time (in seconds)') + 
+  labs(y='Time (in seconds)') +
   theme_bw()
 graph
 
@@ -87,7 +86,7 @@ t.test(Time ~ Page, data=session_times, alternative='less')
 
 ## ANOVA
 
-graph <- ggplot(four_sessions, aes(x=Page, y=Time)) + 
+graph <- ggplot(four_sessions, aes(x=Page, y=Time)) +
   geom_boxplot() +
   labs(y='Time (in seconds)') +
   theme_bw()
